@@ -5,10 +5,13 @@ import com.pokemonreview.api.dto.PokemonDto;
 import com.pokemonreview.api.dto.PokemonResponse;
 import com.pokemonreview.api.models.Pokemon;
 import com.pokemonreview.api.service.PokemonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import java.util.List;
 
@@ -18,10 +21,14 @@ public class PokemonController {
 
     private PokemonService pokemonService;
 
+    Logger log = LoggerFactory.getLogger(PokemonController.class);
+
     @Autowired
     public PokemonController(PokemonService pokemonService) {
         this.pokemonService = pokemonService;
     }
+
+
 
     @GetMapping("pokemon")
     public ResponseEntity<PokemonResponse> getPokemons(
